@@ -114,7 +114,6 @@
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
         <div class="container">
             <a class="navbar-brand" href="#">
@@ -126,26 +125,22 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Accueil</a>
+                        <a class="nav-link" href="index.html">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Programme</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Inscription</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="formulaire.php">Programme</a>
                     </li>
                     <li class="nav-item ms-lg-3">
-                        <a class="btn btn-outline-primary" href="login.php">Connexion</a>
+                        <a class="btn btn-outline-primary" href="formulaire.php">Inscription</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-primary" href="login.php">Connexion</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero-section">
         <div class="container text-center position-relative">
             <h1 class="display-4 fw-bold mb-4">Master Professionnel en Finances Publiques</h1>
@@ -153,8 +148,6 @@
             <a href="formulaire.php" class="btn btn-light btn-lg px-5 py-3 fw-bold">Commencer l'inscription</a>
         </div>
     </section>
-
-    <!-- Process Section -->
     <section class="py-5">
         <div class="container">
             <div class="text-center mb-5">
@@ -185,10 +178,10 @@
                         </div>
                         <h4 class="mb-3"><span class="step-number">2</span> Formulaire en ligne</h4>
                         <ul class="feature-list list-unstyled">
-                            <li>Remplissage du formulaire</li>
-                            <li>Upload des documents</li>
-                            <li>Paiement des frais (10 000 FCFA)</li>
-                            <li>Validation des informations</li>
+                            <li>Suivez les étapes</li>
+                            <li>remplissez le formulaire</li>
+                            <li>Paiement des frais sur place ou en ligne</li>
+                            <li>Validez vos informations</li>
                         </ul>
                     </div>
                 </div>
@@ -200,10 +193,10 @@
                         </div>
                         <h4 class="mb-3"><span class="step-number">3</span> Validation finale</h4>
                         <ul class="feature-list list-unstyled">
+                            <li>Dépôt physique du dossier</li>
                             <li>Examen du dossier</li>
                             <li>Entretien éventuel</li>
                             <li>Notification des résultats</li>
-                            <li>Dépôt physique du dossier</li>
                         </ul>
                     </div>
                 </div>
@@ -241,18 +234,17 @@
                 <div class="col-md-4 mb-4 mb-md-0">
                     <h5>Liens utiles</h5>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-white text-decoration-none">Accueil</a></li>
+                        <li><a href="index.html" class="text-white text-decoration-none">Accueil</a></li>
                         <li><a href="#" class="text-white text-decoration-none">Programme</a></li>
                         <li><a href="#" class="text-white text-decoration-none">Inscription</a></li>
-                        <li><a href="#" class="text-white text-decoration-none">Contact</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">
                     <h5>Contact</h5>
                     <ul class="list-unstyled">
                         <li><i class="bi bi-geo-alt-fill me-2"></i> Yaoundé, Cameroun</li>
-                        <li><i class="bi bi-telephone-fill me-2"></i> (+237) 699 99 99 99</li>
-                        <li><i class="bi bi-envelope-fill me-2"></i> contact@pssfp.cm</li>
+                        <li><i class="bi bi-telephone-fill me-2"></i> (+237)  694 17 61 92</li>
+                        <li><i class="bi bi-envelope-fill me-2"></i> info@pssfp.net</li>
                     </ul>
                 </div>
             </div>

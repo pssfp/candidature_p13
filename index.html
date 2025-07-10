@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PSSFP - Appel à Candidature</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      height: 100vh;
+       background: rgba(180, 150, 255, 0);
+      overflow-x: hidden;
+    }
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background-color: #6a0dad;
+      color: white;
+      position: absolute;
+      width: 100%;
+      top: 0;
+      z-index: 3;
+    }
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      align-items: center;
+    }
+    .nav-links a, .nav-links .cta-header {
+      color: white;
+      margin-left: 10px;
+      margin-top: 5px;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    .nav-links .cta-header {
+      background-color: #ffffff;
+      color: #6a0dad;
+      font-weight: 600;
+    }
+    .landing {
+      position: relative;
+      height: 100vh;
+      width: 100%;
+      padding-top: 80px;
+      background-color: rgba(61, 41, 112, 0.5);
+    }
+    .background-slideshow {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -2;
+    }
+    .background-slideshow img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      filter: brightness(0.75) blur(3px);
+    }
+    .background-slideshow img.active {
+      opacity: 1;
+    }
+    .overlay {
+      position: absolute;
+      top: 0px;
+      left: 0;
+      width: 100%;
+      height: 65vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      z-index: 2;
+      flex-direction: column;
+    }
+    .logo {
+      max-width: 100px;
+      margin-bottom: 0px;
+    }
+    .content h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    .content p {
+      font-size: 1.1em;
+      margin-bottom: 5px;
+      max-width: 600px;
+      margin-bottom: 30px;
+    }
+    .cta-button {
+      background-color: #8413e0;
+      color: #ffffff;
+      padding: 12px 25px;
+      font-size: 1em;
+      border: none;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s;
+      font-weight: 600;
+    }
+    .cta-button:hover {
+      background-color: #f0e5ff;
+      transform: scale(1.05);
+      color:black;
+    }
+    .benefits {
+      margin-top: 10px;
+      position: absolute;
+      top: 55vh;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(255, 255, 255, 0.97);
+      padding: 15px 25px;
+      border-radius: 20px;
+      width: 85%;
+      max-width: 1000px;
+      text-align: center;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      z-index: 3;
+    }
+    .benefits h2 {
+      color: #6a0dad;
+      margin-bottom: 15px;
+      font-size: 1.5em;
+    }
+    .benefit-list {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .benefit-item {
+      flex: 1;
+      min-width: 200px;
+      max-width: 220px;
+      padding: 15px;
+      background: #f7f3ff;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .benefit-item i {
+      font-size: 30px;
+      color: #1b0c25;
+      margin-bottom: 10px;
+    }
+    .benefit-item h3 {
+      font-size: 1em;
+      color: #1b0c25;
+      margin-bottom: 8px;
+    }
+    .benefit-item p {
+      font-size: 0.9em;
+      color: #333;
+    }
+    footer {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      font-size: 0.9em;
+      color: #adadad;
+      z-index: 3;
+    }
+    @media screen and (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav-links {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+      }
+      .nav-links a, .nav-links .cta-header {
+        margin: 5px 5px;
+        padding: 6px 10px;
+      }
+      .content h1 {
+        font-size: 1.8em;
+      }
+      .content p {
+        font-size: 1em;
+      }
+      .benefit-list {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+  <script>
+    let currentSlide = 0;
+    const slides = [];
+
+    window.addEventListener("DOMContentLoaded", () => {
+      const images = document.querySelectorAll(".bg-slide");
+      images.forEach((img, index) => {
+        slides.push(img);
+        if (index === 0) img.classList.add("active");
+      });
+
+      setInterval(() => {
+        slides[currentSlide].classList.remove("active");
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add("active");
+      }, 5000);
+    });
+  </script>
+</head>
+<body>
+  <header>
+    <div><strong>PSSFP</strong></div>
+    <nav class="nav-links">
+      <a href="#">Accueil</a>
+      <a href="#">FR</a>
+      <a href="#">EN</a>
+      <a href="formulaire.php" class="cta-header">Postulez ICI</a>
+    </nav>
+  </header>
+
+  <section class="landing">
+    <div class="overlay">
+      <div class="content">
+        <img src="logo.png" alt="Logo PSSFP" class="logo">
+        <h1>Master en Finances Publiques</h1>
+        <p>Intégrez une formation d'excellence pour devenir un acteur clé de la gestion publique.</p>
+        <a href="formulaire.php" class="cta-button">En Savoir Plus</a>
+      </div>
+    </div>
+    <div class="background-slideshow">
+      <img src="bg1.jpg" class="bg-slide" />
+      <img src="bg2.jpg" class="bg-slide" />
+      <img src="bg3.jpg" class="bg-slide" />
+    </div>
+    <div class="benefits">
+      <h2>Pourquoi rejoindre le programme PSSFP ?</h2>
+      <div class="benefit-list">
+        <div class="benefit-item">
+          <i class="fas fa-user-graduate"></i>
+          <h3>Expertise certifiée</h3>
+          <p>Formation encadrée par des experts du secteur public et financier.</p>
+        </div>
+        <div class="benefit-item">
+          <i class="fas fa-briefcase"></i>
+          <h3>Opportunités professionnelles</h3>
+          <p>Renforcez votre profil pour intégrer des institutions publiques et internationales.</p>
+        </div>
+        <div class="benefit-item">
+          <i class="fas fa-network-wired"></i>
+          <h3>Réseau puissant</h3>
+          <p>Intégrez une communauté dynamique de professionnels et de décideurs.</p>
+        </div>
+        <div class="benefit-item">
+          <i class="fas fa-laptop-house"></i>
+          <h3>Accessibilité</h3>
+          <p>Présentiel ou distanciel, la formation est ouverte à tous les profils.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer>
+    &copy; 2025 Programme supérieur de spécialisation en finances publiques
+  </footer>
+</body>
+</html>

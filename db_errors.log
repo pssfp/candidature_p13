@@ -1,0 +1,8 @@
+2025-07-07 14:12:56 - SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+2025-07-07 14:13:19 - SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+2025-07-09 08:52:40 - SQLSTATE[42S22]: Column not found: 1054 Champ 'adresse_employeur' inconnu dans field list
+2025-07-10 13:47:26 - SQLSTATE[HY000]: General error: 1442 Can't update table 'candidats' in stored function/trigger because it is already used by statement which invoked this stored function/trigger.
+2025-07-10 13:48:58 - SQLSTATE[HY000]: General error: 1442 Can't update table 'candidats' in stored function/trigger because it is already used by statement which invoked this stored function/trigger.
+2025-07-10 13:54:04 - SQLSTATE[HY000]: General error: 1442 Can't update table 'candidats' in stored function/trigger because it is already used by statement which invoked this stored function/trigger.
+2025-07-10 13:55:32 - SQLSTATE[HY000]: General error: 1442 Can't update table 'candidats' in stored function/trigger because it is already used by statement which invoked this stored function/trigger.
+2025-07-10 14:39:21 - SQLSTATE[HY000]: General error: 1442 Can't update table 'candidats' in stored function/trigger because it is already used by statement which invoked this stored function/trigger.

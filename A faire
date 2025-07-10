@@ -4,13 +4,12 @@ configurer le crud✅
 ------------------------------------
 -page d'affichage + modification ✅
 -configurer telechargement de la fiche du candidats✅
-$$$$$$configurer l'envoie automatique par mail (en attente)
+
 -dropdown des indicatifs numero pays (avoir un dropdown comme dans les site form moderne ou l'utilisateur choisi l'indicatif de son pay puis à coté entre son numéro de téléphone)✅
 -dropdown du statut employé (les staut qu'un employé peut avoir sont : etudiant, fonctionnaire/contractuelle, travailleur privé)✅
 -supprimer diplome requis✅
 ------------------------------------
 
------------------------------------
 mettre l'étape de payement apres tous ✅
 -mettre une page avant le formulaire (préparer la page✅, placer la page avant le formulaire)
 (lorsque l'on clique sur le bouton pour en savoir plus sur la page l'index on est redirigé vers une page qui explique les étapes pour l'inscription avec des boutont et lien CTA pour redirigé le candidat ou l'utilisateur sur le formualire)✅
@@ -26,3 +25,4 @@ mettre l'étape de payement apres tous ✅
 -pdf avec filigramme Copie Etudiant et copie Administration✅
 -upload de la photo du candidats(ajouter dans le formulaire un espace pour permettre au candidat de upload sa photo)✅
 -Qr code qui renvoi vers le recapitulatifs du candidats (ajouter un qr code sur le pdf crée qui dirige vers la page récapitulatif de chaque candidat)
+-$$$$$$configurer l'envoie automatique par mail (en attente)

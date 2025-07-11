@@ -228,7 +228,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4 mb-4 mb-md-0">
-                    <img src="logo-white.png" alt="Logo PSSFP" height="50" class="mb-3">
+                    <img src="logo.png" alt="Logo PSSFP" height="50" class="mb-3">
                     <p>Programme Supérieur de Spécialisation en Finances Publiques</p>
                 </div>
                 <div class="col-md-4 mb-4 mb-md-0">

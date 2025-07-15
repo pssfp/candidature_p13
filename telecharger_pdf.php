@@ -3,6 +3,9 @@ require_once 'dompdf/autoload.inc.php';
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
+// la librairie pour le QR Code
+require_once 'phpqrcode/qrlib.php';
+
 // Connexion DB
 $pdo = new PDO('mysql:host=localhost;dbname=pssfp_candidatures', 'root', '');
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -16,6 +19,21 @@ if (!$candidat) die("Candidat non trouvé");
 
 function generateHTML($candidat, $filigrane) {
     $date = date('d/m/Y à H:i');
+    
+    $qrContent = "Candidat PSSFP\n";
+    $qrContent .= "N°: P13025-".$candidat['id']."\n";
+    $qrContent .= "Nom: ".$candidat['prenom']." ".$candidat['nom']."\n";
+    $qrContent .= "Email: ".$candidat['email']."\n";
+    $qrContent .= "Date: ".$date;
+    $qrContent = "http://localhost/candidature_P13/" . $candidat['id'];
+
+    
+     // Générer le QR Code
+    $qrPath = 'temp/qrcode_'.$candidat['id'].'.png';     
+    QRcode::png($qrContent, $qrPath, QR_ECLEVEL_L, 4, 2);
+    $qrData = base64_encode(file_get_contents($qrPath));
+    unlink($qrPath);
+    
     ob_start();
     ?>
     <!DOCTYPE html>
@@ -34,7 +52,6 @@ function generateHTML($candidat, $filigrane) {
             font-weight : 600;
             color: rgba(158, 158, 158, 0.2);
             z-index: 0;
-        
         }
         .header { text-align: center; border-bottom: 2px solid #6a0dad; padding-bottom: 10px; margin-bottom: 20px; }
         .header h1 { color: #6a0dad; font-size: 22px; }
@@ -53,6 +70,13 @@ function generateHTML($candidat, $filigrane) {
             height: 100%;
             object-fit: cover;
         }
+        .qr-box {
+            float: right;
+            width: 100px;
+            height: 100px;
+            margin-left: 10px;
+            margin-top: 10px;
+        }
         .section { margin-bottom: 20px; clear: both; }
         .section-title {
             background: #f4f0ff;
@@ -69,6 +93,13 @@ function generateHTML($candidat, $filigrane) {
         .page-break {
             page-break-after: always;
         }
+        .qr-container {
+            position: absolute;
+            bottom: 30px;
+            right: 20px;
+            text-align: center;
+            font-size: 8px;
+        }
     </style>
     </head>
     <body>
@@ -80,6 +111,12 @@ function generateHTML($candidat, $filigrane) {
         <h1>Fiche récapitulative de candidature</h1>
         <p>Généré le <?= $date ?> - candidat N° candidat: P13025-<?= $candidat['id'] ?></p>
     </div>
+    
+    <div class="qr-container">
+        <img src="data:image/png;base64,<?= $qrData ?>" alt="QR Code" class="qr-box">
+        <div>Scannez pour vérifier</div>
+    </div>
+
     <div class="section">
         <div class="section-title">Spécialité</div>
         <div class="info-row"><span class="info-label">Type d'étude :</span><span class="info-value"><?= $candidat['type_etude'] ?></span></div>
@@ -139,24 +176,21 @@ function generateHTML($candidat, $filigrane) {
     return ob_get_clean();
 }
 
-// Générer le HTML pour les deux versions
 $html_candidat = generateHTML($candidat, "COPIE CANDIDAT");
 $html_admin = generateHTML($candidat, "COPIE ADMINISTRATION");
 
-// Combiner les deux pages avec un saut de page
+// pour me permettre de faire le saut de page
 $html_complet = $html_candidat . '<div class="page-break"></div>' . $html_admin;
 
 $options = new Options();
 $options->set('defaultFont', 'DejaVu Sans');
 $options->set('isHtml5ParserEnabled', true);
-$options->set('isRemoteEnabled', true); // Permet le chargement des images distantes
+$options->set('isRemoteEnabled', true); 
 
 $dompdf = new Dompdf($options);
 $dompdf->loadHtml($html_complet);
 $dompdf->setPaper('A4', 'portrait');
 $dompdf->render();
-
-// Ajouter le chemin absolu pour les images locales
 $context = stream_context_create([ 
     'ssl' => [ 
         'verify_peer' => FALSE, 

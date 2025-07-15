@@ -143,7 +143,7 @@ function generateHTML($candidat, $filigrane)
 
             .qr-container {
                 position: absolute;
-                bottom: 80px;
+                bottom: 70px;
                 right: 0px;
                 text-align: center;
                 font-size: 8px;
@@ -169,8 +169,8 @@ function generateHTML($candidat, $filigrane)
                         PROGRAMME SUPÉRIEUR DE SPÉCIALISATION EN FINANCES PUBLIQUES<br>
                         --------------
                     </td>
-                    <td style="width: 30%; text-align: center; vertical-align: middle;">
-                        <img src="logo.png" alt="Logo" height="50">
+                    <td style="width: 80%; text-align: center; vertical-align: middle;">
+                        <img src="http://localhost/candidature_P13/logo.png" alt="Logo" height="80">
                     </td>
                     <td style="width: 35%; font-size: 8px; text-align: center; vertical-align: middle; line-height: 1.1;">
                         REPUBLIC OF CAMEROON<br>
@@ -198,13 +198,6 @@ function generateHTML($candidat, $filigrane)
         </div>
 
         <div class="section">
-            <div class="section-title">Spécialité</div>
-            <div class="info-row"><span class="info-label">Type d'étude :</span><span
-                    class="info-value"><?= $candidat['type_etude'] ?></span></div>
-            <div class="info-row"><span class="info-label">Spécialité :</span><span
-                    class="info-value"><?= $candidat['specialite'] ?></div>
-        </div>
-        <div class="section">
             <div class="section-title">Informations personnelles</div>
             <div class="photo-box">
                 <?php if (!empty($candidat['photo'])): ?>
@@ -226,7 +219,14 @@ function generateHTML($candidat, $filigrane)
                     class="info-value"><?= $candidat['statut_matrimonial'] ?> (<?= $candidat['nb_enfants'] ?>
                     enfants)</span></div>
         </div>
-
+                    
+        <div class="section">
+            <div class="section-title">Spécialité</div>
+            <div class="info-row"><span class="info-label">Type d'étude :</span><span
+                    class="info-value"><?= $candidat['type_etude'] ?></span></div>
+            <div class="info-row"><span class="info-label">Spécialité :</span><span
+                    class="info-value"><?= $candidat['specialite'] ?></div>
+        </div>
         <div class="section">
             <div class="section-title">Coordonnées</div>
             <div class="info-row"><span class="info-label">Téléphones :</span><span

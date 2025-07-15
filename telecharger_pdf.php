@@ -263,6 +263,7 @@ function generateHTML($candidat, $filigrane)
             <div class="section-title">Autres informations</div>
             <div class="info-row"><span class="info-label">Moyen de connaissance :</span><span
                     class="info-value"><?= $candidat['moyen_connaissance'] ?></span></div>
+                    <!--<div class="info-row"><span class="info-label">Mode de paiement :</span><span class="info-value"><?= $candidat['mode_paiement'] ?></span></div>-->
         </div>
 
         <div class="footer">

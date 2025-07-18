@@ -9,12 +9,10 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        // Fonction de nettoyage
         function clean($data) {
             return htmlspecialchars(trim($data ?? ''));
         }
 
-        // Gestion du fichier photo
         $photoName = '';
         if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
             $uploadDir = 'uploads/';
@@ -24,8 +22,6 @@ try {
             
             $photoName = uniqid() . '_' . basename($_FILES['photo']['name']);
             $uploadFile = $uploadDir . $photoName;
-            
-            // Vérification du type de fichier
             $allowedTypes = ['image/jpeg', 'image/png'];
             $fileType = mime_content_type($_FILES['photo']['tmp_name']);
             
@@ -40,10 +36,8 @@ try {
             }
         }
 
-        // Génération du numéro de candidat
         $numero_candidat = 'P' . date('y') . str_pad(rand(1000, 9999), 4, '0', STR_PAD_LEFT);
 
-        // Formatage du numéro de téléphone avec indicatif
         $telephone1 = clean($_POST['indicatif1']) . clean($_POST['telephone1']);
         $telephone2 = !empty($_POST['telephone2']) ? clean($_POST['indicatif2']) . clean($_POST['telephone2']) : null;
 
@@ -96,11 +90,9 @@ try {
         $sql = "INSERT INTO candidats ($columns) VALUES ($placeholders)";
         $stmt = $pdo->prepare($sql);
         
-        // Exécution avec vérification
         if ($stmt->execute($data)) {
             $lastId = $pdo->lastInsertId();
             
-            // Création du compte utilisateur associé
             $username = $numero_candidat;
             $password = password_hash($telephone1, PASSWORD_DEFAULT);
             

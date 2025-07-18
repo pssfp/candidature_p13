@@ -1,18 +1,24 @@
 <?php
 session_start();
 
-// Configuration des en-têtes de sécurité
+// Rediriger les utilisateurs déjà connectés
+if (isset($_SESSION['user_id'])) {
+    $redirect = isset($_SESSION['redirect_url']) ? $_SESSION['redirect_url'] : 
+               ($_SESSION['role'] === 'admin' ? 'admin_dashboard.php' : 'dashboard.php');
+    unset($_SESSION['redirect_url']);
+    header("Location: $redirect");
+    exit();
+}
+
 header("X-Frame-Options: DENY");
 header("X-Content-Type-Options: nosniff");
 header("Referrer-Policy: strict-origin-when-cross-origin");
 
-// Vérification CSRF pour les requêtes POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
         die("Erreur de sécurité : Token CSRF invalide");
     }
 
-    // Configuration PDO avec gestion des erreurs
     try {
         $pdo = new PDO(
             'mysql:host=localhost;dbname=pssfp_candidatures;charset=utf8',
@@ -28,7 +34,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $username = trim($_POST['username']);
         $password = $_POST['password'];
         
-        // Validation des entrées
         if (empty($username) || empty($password)) {
             throw new Exception("Tous les champs sont obligatoires");
         }
@@ -38,7 +43,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user = $stmt->fetch();
         
         if ($user && password_verify($password, $user['password'])) {
-            // Régénération de l'ID de session pour prévenir les attaques de fixation
             session_regenerate_id(true);
             
             $_SESSION['user_id'] = $user['id'];
@@ -47,11 +51,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['last_login'] = time();
             
             // Redirection sécurisée
-            $redirect = ($user['role'] === 'admin') ? 'admin_dashboard.php' : 'candidat_dashboard.php';
+            $redirect = ($user['role'] === 'admin') ? 'admin_dashboard.php' : 'dashboard.php';
             header("Location: $redirect");
             exit();
         } else {
-            // Délai en cas d'échec pour prévenir les attaques par force brute
             sleep(2);
             throw new Exception("Identifiants incorrects");
         }
@@ -222,6 +225,11 @@ if (empty($_SESSION['csrf_token'])) {
                             </button>
                         </div>
                         
+                        <div class="d-grid gap-2 mb-3">
+                            <a href="préinscription.php" class="btn btn-primary btn-login">
+                                <i class="bi bi-box-arrow-in-right me-2"></i>Revenir à l'acceuil
+                            </a>
+                        </div>
                         <div class="text-center">
                             <a href="forgot_password.php" class="text-decoration-none">Mot de passe oublié ?</a>
                         </div>
@@ -254,7 +262,6 @@ if (empty($_SESSION['csrf_token'])) {
             }
         });
         
-        // Focus sur le premier champ en erreur
         <?php if (isset($error)): ?>
             document.querySelector('input:invalid')?.focus();
         <?php endif; ?>

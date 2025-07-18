@@ -137,9 +137,9 @@ function generateHTML($candidat, $filigrane)
                 padding-top: 10px;
             }
 
-            .page-break {
+            /*.page-break {
                 page-break-after: always;
-            }
+            }*/
 
             .qr-container {
                 position: absolute;
@@ -189,7 +189,7 @@ function generateHTML($candidat, $filigrane)
 
 
             <h1>Fiche récapitulative de candidature</h1>
-            <p>Généré le <?= $date ?> - candidat N° candidat: P13025-<?= $candidat['id'] ?></p>
+            <p>candidat N° : <?= $candidat['numero_candidat'] ?></p>
         </div>
 
         <div class="qr-container">
@@ -213,11 +213,8 @@ function generateHTML($candidat, $filigrane)
                     class="info-value"><?= $candidat['epouse'] ?></span></div>
             <div class="info-row"><span class="info-label">Date & lieu de naissance :</span><span
                     class="info-value"><?= $candidat['date_naissance'] . ' à ' . $candidat['lieu_naissance'] ?></span></div>
-            <div class="info-row"><span class="info-label">Nationalité :</span><span
-                    class="info-value"><?= $candidat['nationalite'] ?></span></div>
             <div class="info-row"><span class="info-label">Statut matrimonial :</span><span
-                    class="info-value"><?= $candidat['statut_matrimonial'] ?> (<?= $candidat['nb_enfants'] ?>
-                    enfants)</span></div>
+                    class="info-value"><?= $candidat['statut_matrimonial'] ?> </span></div>
         </div>
                     
         <div class="section">
@@ -268,6 +265,7 @@ function generateHTML($candidat, $filigrane)
 
         <div class="footer">
             Plateforme PSSFP – © <?= date('Y') ?> – Tous droits réservés
+            <br><center>Généré le <?= $date ?> </center>
         </div>
 
     </body>
@@ -281,8 +279,8 @@ $html_candidat = generateHTML($candidat, "COPIE CANDIDAT");
 $html_admin = generateHTML($candidat, "COPIE ADMINISTRATION");
 
 // pour me permettre de faire le saut de page
-$html_complet = $html_candidat . '<div class="page-break"></div>' . $html_admin;
 
+$html_complet = $html_candidat . $html_admin;
 $options = new Options();
 $options->set('defaultFont', 'DejaVu Sans');
 $options->set('isHtml5ParserEnabled', true);

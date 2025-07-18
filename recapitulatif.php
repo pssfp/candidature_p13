@@ -20,11 +20,9 @@ if (!$candidat) {
 // 3. TRAITEMENT DES MODIFICATIONS
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['modifier'])) {
-        // Construction dynamique des données à mettre à jour
         $data = ['id' => $candidat_id];
         $updateFields = [];
 
-        // Liste de tous les champs possibles
         $allFields = [
             'civilite',
             'nom',
@@ -34,7 +32,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'lieu_naissance',
             'region',
             'departement',
-            'nationalite',
             'statut_matrimonial',
             'nb_enfants',
             'pays_origine',
@@ -52,9 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'statut_actuel',
             'employeur',
             'tel_employeur',
-            'institut',
             'adresse_employeur2',
-            'email_admin',
             'moyen_connaissance',
             'engagement_nom',
             'mode_paiement'
@@ -84,7 +79,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['error'] = "Erreur DB: " . $e->getMessage();
         }
     } elseif (isset($_POST['valider'])) {
-        // [Code existant pour la génération PDF...]
     }
 }
 ?>
@@ -227,7 +221,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <h1 class="text-purple"><i class="bi bi-file-earmark-person"></i> Récapitulatif de candidature</h1>
                 <p class="lead">Vérifiez et modifiez vos informations avant validation finale</p>
                 <div class="badge bg text-success fs-6">
-                    <i class="bi bi-person-badge"></i> N° candidat: <?= $candidat['numero_candidat'] ?>
+                    <i class="bi bi-person-badge"></i> N° candidat: P13025-<?= $candidat_id ?>
                 </div>
             </div>
 
@@ -381,20 +375,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     onblur="disableFieldEdit(this)">
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="mb-4 field-container">
-                                <div class="info-label">Nationalité</div>
-                                <div class="info-value" onclick="enableFieldEdit(this)">
-                                    <?= htmlspecialchars($candidat['nationalite']) ?>
-                                </div>
-                                <input type="text" class="form-control edit-field" name="nationalite"
-                                    value="<?= htmlspecialchars($candidat['nationalite']) ?>"
-                                    onblur="disableFieldEdit(this)">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
+                   
                         <div class="col-md-4">
                             <div class="mb-4 field-container">
                                 <div class="info-label">Statut matrimonial</div>
@@ -406,17 +387,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <option value="Célibataire" <?= $candidat['statut_matrimonial'] == 'Célibataire' ? 'selected' : '' ?>>Célibataire</option>
                                     <option value="Marié(e)" <?= $candidat['statut_matrimonial'] == 'Marié(e)' ? 'selected' : '' ?>>Marié(e)</option>
                                 </select>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="mb-4 field-container">
-                                <div class="info-label">Nombre d'enfants à charge</div>
-                                <div class="info-value" onclick="enableFieldEdit(this)">
-                                    <?= htmlspecialchars($candidat['nb_enfants']) ?>
-                                </div>
-                                <input type="number" class="form-control edit-field" name="nb_enfants"
-                                    value="<?= htmlspecialchars($candidat['nb_enfants']) ?>"
-                                    onblur="disableFieldEdit(this)">
                             </div>
                         </div>
                     </div>
@@ -527,7 +497,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <h2 class="section-title"><i class="bi bi-mortarboard"></i> Cursus académique</h2>
 
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="mb-4 field-container">
                                 <div class="info-label">Dernier diplôme obtenu</div>
                                 <div class="info-value" onclick="enableFieldEdit(this)">
@@ -538,20 +508,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     onblur="disableFieldEdit(this)">
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="mb-4 field-container">
-                                <div class="info-label">institut</div>
-                                <div class="info-value" onclick="enableFieldEdit(this)">
-                                    <?= htmlspecialchars($candidat['institut']) ?>
-                                </div>
-                                <input type="text" class="form-control edit-field" name="institut"
-                                    value="<?= htmlspecialchars($candidat['institut']) ?>"
-                                    onblur="disableFieldEdit(this)">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
                         
                         <div class="col-md-4">
                             <div class="mb-4 field-container">
@@ -583,7 +539,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <h2 class="section-title"><i class="bi bi-briefcase"></i> Coordonnées professionnelles</h2>
 
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="mb-4 field-container">
                                 <div class="info-label">Statut actuel</div>
                                 <div class="info-value" onclick="enableFieldEdit(this)">
@@ -594,7 +550,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     onblur="disableFieldEdit(this)">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="mb-4 field-container">
                                 <div class="info-label">Employeur</div>
                                 <div class="info-value" onclick="enableFieldEdit(this)">
@@ -605,7 +561,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     onblur="disableFieldEdit(this)">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="mb-4 field-container">
                                 <div class="info-label">Téléphone employeur</div>
                                 <div class="info-value" onclick="enableFieldEdit(this)">
@@ -616,10 +572,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     onblur="disableFieldEdit(this)">
                             </div>
                         </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <div class="mb-4 field-container">
                                 <div class="info-label">Adresse employeur</div>
                                 <div class="info-value" onclick="enableFieldEdit(this)">
@@ -630,17 +583,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     onblur="disableFieldEdit(this)">
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="mb-4 field-container">
-                                <div class="info-label">Email administratif</div>
-                                <div class="info-value" onclick="enableFieldEdit(this)">
-                                    <?= htmlspecialchars($candidat['email_admin']) ?>
-                                </div>
-                                <input type="email" class="form-control edit-field" name="email_admin"
-                                    value="<?= htmlspecialchars($candidat['email_admin']) ?>"
-                                    onblur="disableFieldEdit(this)">
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
 
@@ -681,56 +624,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Activer l'édition d'un champ au clic
-        function enableFieldEdit(element) {
-            const container = element.closest('.field-container');
-            container.classList.add('editing');
-
-            // Focus sur le premier champ éditable
-            const input = container.querySelector('.edit-field');
-            if (input) {
-                if (input.tagName === 'INPUT' || input.tagName === 'SELECT') {
-                    input.focus();
-                } else {
-                    // Pour les radios, focus sur le premier
-                    const firstInput = input.querySelector('input');
-                    if (firstInput) firstInput.focus();
-                }
-            }
-        }
-
-        // Désactiver l'édition quand on quitte le champ
-        function disableFieldEdit(input) {
-            const container = input.closest('.field-container');
-            container.classList.remove('editing');
-
-            // Mettre à jour la valeur affichée
-            const valueDisplay = container.querySelector('.info-value');
-            if (input.tagName === 'SELECT') {
-                valueDisplay.textContent = input.options[input.selectedIndex].text;
-            } else if (input.tagName === 'INPUT' && input.type === 'radio') {
-                const selectedRadio = container.querySelector('input[name="' + input.name + '"]:checked');
-                if (selectedRadio) {
-                    valueDisplay.textContent = selectedRadio.nextElementSibling.textContent;
-                }
-            } else if (input.value) {
-                valueDisplay.textContent = input.value;
-            }
-        }
-
-        // Pour les selects, on gère le changement de valeur
-        document.querySelectorAll('select.edit-field').forEach(select => {
-            select.addEventListener('change', function () {
-                disableFieldEdit(this);
-            });
-        });
-
-        // Pour les radios, on gère le changement
-        document.querySelectorAll('input[type="radio"]').forEach(radio => {
-            radio.addEventListener('change', function () {
-                disableFieldEdit(this);
-            });
-        });
 
         // Validation avant soumission
         document.getElementById('candidatureForm').addEventListener('submit', function (e) {

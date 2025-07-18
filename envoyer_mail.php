@@ -2,11 +2,11 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'dompdf/vendor/autoload.php'; 
+require 'dompdf/vendor/autoload.php'; // Chemin vers l'autoload de PHPMailer
 
 // Récupérer les données du candidat depuis la base de données
 $pdo = new PDO('mysql:host=localhost;dbname=pssfp_candidatures', 'root', '');
-$candidat_id = $lastId;
+$candidat_id = $lastId; // Utilise la variable définie dans submit.php
 $stmt = $pdo->prepare("SELECT * FROM candidats WHERE id = ?");
 $stmt->execute([$candidat_id]);
 $candidat = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -15,6 +15,7 @@ if (!$candidat) {
     die("Candidat non trouvé");
 }
 
+// Configuration de l'email
 $mail = new PHPMailer(true);
 
 try {
@@ -22,15 +23,15 @@ try {
     $mail->isSMTP();
     $mail->Host = 'smtp.example.com'; // Votre serveur SMTP
     $mail->SMTPAuth = true;
-    $mail->Username = 'g.kouedi90@gmail.com'; // Votre email
-    $mail->Password = '**************'; // Votre mot de passe
+    $mail->Username = 'votre@email.com'; // Votre email
+    $mail->Password = 'votre_mot_de_passe'; // Votre mot de passe
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port = 587;
 
     // Destinataires
     $mail->setFrom('no-reply@pssfp.net', 'PSSFP - Plateforme de candidature');
     $mail->addAddress($candidat['email']); // Email du candidat
-    $mail->addBCC('g.kouedi90@gmail.com'); 
+    $mail->addBCC('admin@pssfp.net'); // Copie cachée pour vous
 
     // Contenu
     $mail->isHTML(true);

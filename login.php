@@ -10,15 +10,18 @@ if (isset($_SESSION['user_id'])) {
     exit();
 }
 
+// Configuration des en-têtes de sécurité
 header("X-Frame-Options: DENY");
 header("X-Content-Type-Options: nosniff");
 header("Referrer-Policy: strict-origin-when-cross-origin");
 
+// Vérification CSRF pour les requêtes POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
         die("Erreur de sécurité : Token CSRF invalide");
     }
 
+    // Configuration PDO avec gestion des erreurs
     try {
         $pdo = new PDO(
             'mysql:host=localhost;dbname=pssfp_candidatures;charset=utf8',
@@ -34,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $username = trim($_POST['username']);
         $password = $_POST['password'];
         
+        // Validation des entrées
         if (empty($username) || empty($password)) {
             throw new Exception("Tous les champs sont obligatoires");
         }
@@ -43,6 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user = $stmt->fetch();
         
         if ($user && password_verify($password, $user['password'])) {
+            // Régénération de l'ID de session pour prévenir les attaques de fixation
             session_regenerate_id(true);
             
             $_SESSION['user_id'] = $user['id'];
@@ -55,6 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header("Location: $redirect");
             exit();
         } else {
+            // Délai en cas d'échec pour prévenir les attaques par force brute
             sleep(2);
             throw new Exception("Identifiants incorrects");
         }
@@ -262,6 +268,7 @@ if (empty($_SESSION['csrf_token'])) {
             }
         });
         
+        // Focus sur le premier champ en erreur
         <?php if (isset($error)): ?>
             document.querySelector('input:invalid')?.focus();
         <?php endif; ?>

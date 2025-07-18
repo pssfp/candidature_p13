@@ -479,6 +479,7 @@ $candidatsList = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 
 <body>
+    <!-- Sidebar -->
     <div class="sidebar">
         <div class="sidebar-header">
             <h4>PSSFP Admin</h4>
@@ -531,12 +532,14 @@ $candidatsList = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </nav>
     </div>
 
+    <!-- Main Content -->
     <div class="main-content">
         <div class="header fade-in">
             <h1>Tableau de bord</h1>
             <p class="header-subtitle">Vue d'ensemble de votre système de candidatures</p>
         </div>
 
+        <!-- Stats Cards -->
         <div class="stats-grid fade-in">
             <div class="stat-card postulants">
                 <div class="stat-content">
@@ -575,6 +578,7 @@ $candidatsList = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
         </div>
 
+        <!-- Candidates Table -->
         <div class="candidates-section fade-in">
             <div class="section-header">
                 <h2 class="section-title">Liste des candidats</h2>
@@ -641,6 +645,7 @@ $candidatsList = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </div>
 
+    <!-- Modal -->
     <div class="modal fade" id="candidateModal" tabindex="-1" aria-labelledby="candidateModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -668,7 +673,7 @@ $candidatsList = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return new bootstrap.Tooltip(tooltipTriggerEl)
         });
 
-        // Quand je veux gerer le statut
+        // Gestion du changement de statut
         document.querySelectorAll('.status-select').forEach(select => {
             select.addEventListener('change', function () {
                 const form = this.closest('form');
@@ -685,20 +690,24 @@ $candidatsList = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
+                            // Mise à jour réussie - on rafraîchit simplement la page
                             window.location.reload();
                         }
                     })
                     .catch(error => {
+                        // On ne fait rien en cas d'erreur, pas de console.log ni d'alerte
                         window.location.reload();
                     });
             });
         });
 
+        // Gestion de l'affichage des détails dans le modal
         document.querySelectorAll('.view-details').forEach(button => {
             button.addEventListener('click', function () {
                 const candidateId = this.dataset.candidateId;
                 const modalBody = document.getElementById('candidateDetails');
 
+                // Afficher un spinner pendant le chargement
                 modalBody.innerHTML = `
                     <div class="loading-spinner">
                         <div class="spinner"></div>
@@ -718,6 +727,8 @@ $candidatsList = $stmt->fetchAll(PDO::FETCH_ASSOC);
             });
         });
 
+        // Gestion de la suppression
+        // Gestion de la suppression
         document.querySelectorAll('.delete-candidate').forEach(button => {
             button.addEventListener('click', function () {
                 const candidateId = this.dataset.candidateId;
@@ -731,16 +742,19 @@ $candidatsList = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         body: `id=${candidateId}`
                     })
                         .then(() => {
+                            // Supprimer la ligne du tableau et recharger la page
                             this.closest('tr').remove();
                             window.location.reload();
                         })
                         .catch(() => {
+                            // On ignore complètement les erreurs
                             window.location.reload();
                         });
                 }
             });
         });
 
+        // Animation au chargement
         document.addEventListener('DOMContentLoaded', function () {
             const elements = document.querySelectorAll('.fade-in');
             elements.forEach((el, index) => {

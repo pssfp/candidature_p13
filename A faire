@@ -10,18 +10,18 @@ configurer le crud✅
 ------------------------------------
 
 mettre l'étape de payement apres tous ✅
--mettre une page avant le formulaire (préparer la page✅, placer la page avant le formulaire✅)
+-mettre une page avant le formulaire (préparer la page✅, placer la page avant le formulaire)
 (lorsque l'on clique sur le bouton pour en savoir plus sur la page l'index on est redirigé vers une page qui explique les étapes pour l'inscription avec des boutont et lien CTA pour redirigé le candidat ou l'utilisateur sur le formualire)✅
 -page dashboard✅
 -liste des candidats✅
 -nombre de canidature total✅
 -nombre de personne ayant postulé✅
--nombre de candidat ayant deposé le dossier physique (candidat)(pour cela faire une modification du statut dans la page dashboard)✅
+-nombre de candidat ayant deposé le dossier physique (candidat)(pour cela faire une modification du statut dans la page dashboard)
 -telecharger la fiche du candidats✅
 -login = numero du candidats + numero de telephone
 (quand un candidat ou utilisateur s'inscrit un compte lui est directement crée et le numéro du candidat qui lui est attibué lui sert de login et son numero de telephone de mot de passe)✅
 
 -pdf avec filigramme Copie Etudiant et copie Administration✅
 -upload de la photo du candidats(ajouter dans le formulaire un espace pour permettre au candidat de upload sa photo)✅
--Qr code qui renvoi vers le recapitulatifs du candidats (ajouter un qr code sur le pdf crée qui dirige vers la page récapitulatif de chaque candidat)✅
--$$$$$$configurer l'envoie automatique par mail (en attente)****************************
+-Qr code qui renvoi vers le recapitulatifs du candidats (ajouter un qr code sur le pdf crée qui dirige vers la page récapitulatif de chaque candidat)
+-$$$$$$configurer l'envoie automatique par mail (en attente)

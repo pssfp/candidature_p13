@@ -52,20 +52,22 @@ function generateHTML($candidat, $filigrane)
 
             .filigrane {
                 position: absolute;
-                top: 40%;
+                top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%) rotate(-30deg);
-                font-size: 50px;
-                font-weight: 600;
+                font-size: 25px;
+                font-weight: 800;
                 color: rgba(158, 158, 158, 0.2);
                 z-index: 0;
             }
 
             .header {
+                position:relative;
+                bottom: 45px;
                 text-align: center;
                 border-bottom: 2px solid #6a0dad;
-                padding-bottom: 10px;
-                margin-bottom: 20px;
+                
+                margin-bottom: -20px;
             }
 
             header h1 {
@@ -138,12 +140,12 @@ function generateHTML($candidat, $filigrane)
             }
 
             /*.page-break {
-                page-break-after: always;
-            }*/
+                    page-break-after: always;
+                }*/
 
             .qr-container {
                 position: absolute;
-                bottom: 70px;
+                bottom: 80px;
                 right: 0px;
                 text-align: center;
                 font-size: 8px;
@@ -156,39 +158,10 @@ function generateHTML($candidat, $filigrane)
         <div class="filigrane"><?= $filigrane ?></div>
 
         <div class="header">
-            <table width="100%" style="margin-bottom: 10px; border-collapse: collapse;">
-                <tr>
-                    <td style="width: 35%; font-size: 8px; text-align: center; vertical-align: middle; line-height: 1.1;">
-                        REPUBLIQUE DU CAMEROUN<br>
-                        Paix - Travail - Patrie<br>
-                        --------------<br>
-                        MINISTÈRE DES FINANCES<br>
-                        --------------<br>
-                        SECRÉTARIAT GÉNÉRAL<br>
-                        --------------<br>
-                        PROGRAMME SUPÉRIEUR DE SPÉCIALISATION EN FINANCES PUBLIQUES<br>
-                        --------------
-                    </td>
-                    <td style="width: 80%; text-align: center; vertical-align: middle;">
-                        <img src="http://localhost/candidature_P13/logo.png" alt="Logo" height="80">
-                    </td>
-                    <td style="width: 35%; font-size: 8px; text-align: center; vertical-align: middle; line-height: 1.1;">
-                        REPUBLIC OF CAMEROON<br>
-                        Peace - Work - Fatherland<br>
-                        --------------<br>
-                        MINISTRY OF FINANCE<br>
-                        ----------------<br>
-                        GENERAL SECRETARIAT<br>
-                        --------------<br>
-                        ADVANCED PROGRAM OF SPECIALISATION IN PUBLIC FINANCE<br>
-                        --------------
-                    </td>
-                </tr>
-            </table>
-
-
-
-            <h1>Fiche récapitulative de candidature</h1>
+            <div>
+                <img src="http://localhost/candidature_P13/entete.png" style="width: 95%; height: auto;" alt="">
+            </div>
+            <h1 >Fiche récapitulative de candidature</h1>
             <p>candidat N° : <?= $candidat['numero_candidat'] ?></p>
         </div>
 
@@ -201,9 +174,18 @@ function generateHTML($candidat, $filigrane)
             <div class="section-title">Informations personnelles</div>
             <div class="photo-box">
                 <?php if (!empty($candidat['photo'])): ?>
-                    <img src="uploads/<?= $candidat['photo'] ?>" alt="Photo du candidat">
+                    <?php
+                    $photoPath = $candidat['photo'];
+                    if (file_exists($photoPath)) {
+                        $photoData = base64_encode(file_get_contents($photoPath));
+                        $photoSrc = 'data:' . mime_content_type($photoPath) . ';base64,' . $photoData;
+                        echo '<img src="' . $photoSrc . '" alt="Photo du candidat">';
+                    } else {
+                        echo 'Photo non trouvée';
+                    }
+                    ?>
                 <?php else: ?>
-                    Photo 4X4 manquante
+                    Photo 4X4
                 <?php endif; ?>
             </div>
             <div class="info-row"><span class="info-label">Nom complet :</span><span
@@ -216,7 +198,7 @@ function generateHTML($candidat, $filigrane)
             <div class="info-row"><span class="info-label">Statut matrimonial :</span><span
                     class="info-value"><?= $candidat['statut_matrimonial'] ?> </span></div>
         </div>
-                    
+
         <div class="section">
             <div class="section-title">Spécialité</div>
             <div class="info-row"><span class="info-label">Type d'étude :</span><span
@@ -243,7 +225,7 @@ function generateHTML($candidat, $filigrane)
                     class="info-value"><?= $candidat['specialite_diplome'] ?></span></div>
             <div class="info-row"><span class="info-label">Année :</span><span
                     class="info-value"><?= $candidat['annee_diplome'] ?></span></div>
-            <div class="info-row"><span class="info-label">Institu d'obtention :</span><span
+            <div class="info-row"><span class="info-label">Institut d'obtention :</span><span
                     class="info-value"><?= $candidat['institut'] ?></span></div>
         </div>
 
@@ -255,17 +237,11 @@ function generateHTML($candidat, $filigrane)
                     class="info-value"><?= $candidat['employeur'] . ' (' . $candidat['tel_employeur'] . ')' ?></span></div>
 
         </div>
-
-        <div class="section">
-            <div class="section-title">Autres informations</div>
-            <div class="info-row"><span class="info-label">Moyen de connaissance :</span><span
-                    class="info-value"><?= $candidat['moyen_connaissance'] ?></span></div>
-                    <!--<div class="info-row"><span class="info-label">Mode de paiement :</span><span class="info-value"><?= $candidat['mode_paiement'] ?></span></div>-->
-        </div>
-
+                    
+                    <p>cachet et visa du PSSFP</p> <br><br><br>
         <div class="footer">
             Plateforme PSSFP – © <?= date('Y') ?> – Tous droits réservés
-            <br><center>Généré le <?= $date ?> </center>
+            <br><p> <center>Généré le <?= $date ?> </center></p>
         </div>
 
     </body>

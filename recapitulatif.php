@@ -221,7 +221,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <h1 class="text-purple"><i class="bi bi-file-earmark-person"></i> Récapitulatif de candidature</h1>
                 <p class="lead">Vérifiez et modifiez vos informations avant validation finale</p>
                 <div class="badge bg text-success fs-6">
-                    <i class="bi bi-person-badge"></i> N° candidat: P13025-<?= $candidat_id ?>
+                    <i class="bi bi-person-badge"></i> N° candidat: P13025-<?= $candidat_id ?> <br><br><button type="submit" name="valider" class="btn btn-outline-success">
+                        Télecharger votre fiche d'inscription
+                    </button>
                 </div>
             </div>
 
@@ -587,35 +589,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                 </div>
 
-                <!-- Section 7: Paiement -->
-                <div class="form-section">
-                    <h2 class="section-title"><i class="bi bi-credit-card"></i> Paiement des frais de candidature</h2>
-
-                    <div class="mb-4">
-                        <div class="info-label">Mode de paiement</div>
-                        <div class="info-value"><?= htmlspecialchars($candidat['mode_paiement']) ?></div>
-                    </div>
-
-                    <?php if ($candidat['mode_paiement'] == 'OM/MoMo'): ?>
-                        <div class="alert alert-info">
-                            <p>Veuillez effectuer un paiement de <strong>10 000 FCFA</strong> via Orange Money ou MoMo au
-                                numéro suivant : <strong>699 99 99 99</strong></p>
-                        </div>
-                    <?php else: ?>
-                        <div class="alert alert-info">
-                            <p>Le paiement en espèces s'effectuera sur place au moment du dépôt physique de votre dossier.
-                            </p>
-                        </div>
-                    <?php endif; ?>
-                </div>
 
                 <!-- Boutons de validation -->
                 <div class="text-center mt-5">
                     <button type="submit" name="valider" class="btn btn-success btn-lg me-3">
-                        Valider et télécharger
-                    </button>
-                    <button type="submit" name="modifier" class="btn btn-primary btn-lg">
-                        Enregistrer modifications
+                        Télécharger votre fiche d'inscription
                     </button>
                 </div>
             </form>

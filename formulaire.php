@@ -118,7 +118,7 @@
         <div class="step">3</div>
         <div class="step">4</div>
         <div class="step">5</div>
-        <div class="step">6</div>
+        <!--<div class="step">6</div>-->
       </div>
 
       <div class="form-step active">
@@ -232,7 +232,8 @@
             <select class="form-select" name="pays_origine" id="pays_origine" required>
               <option value="">--- Sélectionnez un pays ---</option>
               <?php
-              $pdo = new PDO('mysql:host=localhost;dbname=pssfp_candidatures', 'root', '');
+              // Connexion à la base de données
+              $pdo = new PDO('mysql:host=127.0.0.1;dbname=pssfp_candidatures', 'root', '');
               $query = "SELECT code_iso, nom FROM pays ORDER BY nom";
               $stmt = $pdo->query($query);
               while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -341,6 +342,7 @@
             <input type="number" class="form-control" name="annee_diplome">
           </div>
         </div>
+        
 
         <h4>V - Vos Coordonnées Professionnelles</h4>
         <div class="row">
@@ -353,7 +355,7 @@
               <option value="Contractuel">Contractuel</option>
               <option value="Travailleur privé">Travailleur privé</option>
               <option value="Autre">Autre</option>
-            </select>
+            </select> 
           </div>
           <div class="col-md-6 mb-3">
             <label>Employeur</label>
@@ -407,6 +409,7 @@
         <h4>VI - Récapitulatif</h4>
         <div class="card mb-4">
           <div class="card-body" id="recapContent">
+            <!-- Le contenu sera généré dynamiquement par JavaScript -->
           </div>
         </div>
         <div class="alert alert-info">
@@ -414,7 +417,7 @@
           <p>Si vous devez modifier une information, utilisez le bouton "Précédent".</p>
         </div>
       </div><br>
-      <div class="form-step">
+      <!--<div class="form-step">
         <h4>VIII - Paiement des frais de candidature</h4>
         <div class="mb-3">
           <label>Mode de paiement *</label><br>
@@ -437,7 +440,7 @@
           <p class="alert alert-info">Le paiement en espèces s'effectuera sur place au moment du dépôt physique de votre
             dossier.</p>
         </div>
-      </div>
+      </div>-->
 
       <div class="form-navigation">
         <button type="button" class="btn btn-secondary" id="prevBtn">Précédent</button>
@@ -558,6 +561,7 @@ saveFirstStepData
     updateFormSteps();
 });
 
+// Dans la fonction saveFirstStepData
 function saveFirstStepData() {
     const formData = new FormData();
     const firstStepFields = steps[0].querySelectorAll('input, select, textarea');
@@ -583,8 +587,12 @@ function saveFirstStepData() {
             form.dataset.candidateId = data.candidateId;
             form.dataset.numeroCandidat = data.numeroCandidat;
             
+            // Afficher le numéro de candidat à l'utilisateur
             alert(`Votre numéro de candidat est: ${data.numeroCandidat}. Veuillez le noter car il vous servira d'identifiant.`);
             
+            // NE PAS passer à l'étape suivante ici
+            // On reste sur l'étape actuelle (1)
+            // L'utilisateur devra cliquer sur "Suivant" manuellement
         } else {
             alert('Erreur: ' + data.message);
         }
@@ -600,6 +608,7 @@ form.addEventListener('submit', function (e) {
     e.preventDefault();
 
     const formData = new FormData(form);
+    // Ajouter l'ID du candidat aux données
     formData.append('candidate_id', form.dataset.candidateId);
 
     fetch('update_candidate.php', {
@@ -612,7 +621,7 @@ form.addEventListener('submit', function (e) {
         if (data.redirect_url) {
             window.location.href = data.redirect_url;
         } else {
-            window.location.href = 'recapitulatif.php?id=' + form.dataset.candidateId;
+            window.location.href = '.php?id=' + form.dataset.candidateId;
         }
     } else {
         alert("Erreur: " + data.message);
@@ -624,7 +633,7 @@ form.addEventListener('submit', function (e) {
     });
 });
 
-
+// Dans le gestionnaire de soumission du formulaire
 form.addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -655,6 +664,7 @@ form.addEventListener('submit', function (e) {
       const formData = new FormData(document.getElementById('multiStepForm'));
       let recapHTML = '<div class="row">';
 
+      // Groupes de champs pour une meilleure organisation
       const fieldGroups = {
         'Informations personnelles': ['civilite', 'nom', 'prenom', 'epouse', 'date_naissance', 'lieu_naissance', 'region', 'departement', 'nationalite', 'statut_matrimonial', 'nb_enfants'],
         'Coordonnées': ['pays_origine', 'pays_residence', 'adresse', 'ville_residence', 'telephone1', 'telephone2', 'email'],
@@ -677,6 +687,7 @@ form.addEventListener('submit', function (e) {
         recapHTML += `</dl></div>`;
       }
 
+      // Photo preview si elle existe
       const photoFile = formData.get('photo');
       if (photoFile && photoFile.name) {
         recapHTML += `<div class="col-12">
@@ -727,30 +738,6 @@ form.addEventListener('submit', function (e) {
       return labels[fieldName] || fieldName;
     }
 
-    // Modifiez la fonction nextBtn.addEventListener pour générer le récapitulatif avant d'afficher l'étape
-    /*nextBtn.addEventListener('click', () => {
-      const currentStepFields = steps[currentStep].querySelectorAll('[required]');
-      let isValid = true;
-
-      currentStepFields.forEach(field => {
-        if (!field.reportValidity()) {
-          isValid = false;
-          field.classList.add('is-invalid');
-        } else {
-          field.classList.remove('is-invalid');
-        }
-      });
-
-      if (isValid && currentStep < steps.length - 1) {
-        // Si on passe à l'étape de récapitulatif (étape 4), générer le contenu
-        if (currentStep === 3) { // L'index commence à 0, donc étape 4 est index 3
-          generateRecapContent();
-        }
-        currentStep++;
-        updateFormSteps();
-      }
-    });*/
-
     function updateFormSteps() {
       steps.forEach((step, i) => {
         step.classList.toggle('active', i === currentStep);
@@ -785,37 +772,6 @@ form.addEventListener('submit', function (e) {
       if (currentStep > 0) currentStep--;
       updateFormSteps();
     });
-
-    // Gestion de la soumission du formulaire
-    /*form.addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      if (validateForm()) {
-        // Soumission via Fetch API
-        fetch(form.action, {
-          method: 'POST',
-          body: new FormData(form)
-        })
-          .then(response => {
-            if (response.redirected) {
-              window.location.href = response.url;
-            } else if (response.ok) {
-              return response.text();
-            }
-            throw new Error('Erreur réseau');
-          })
-          .then(data => {
-            if (data) {
-              console.log(data); // Pour le débogage
-              window.location.href = 'recapitulatif.php?email=' + encodeURIComponent(form.email.value);
-            }
-          })
-          .catch(error => {
-            console.error('Erreur:', error);
-            alert("Une erreur s'est produite lors de la soumission.");
-          });
-      }
-    });*/
 
 form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -871,6 +827,7 @@ form.addEventListener('submit', function (e) {
       });
       if (!isValid) {
         alert("Veuillez remplir tous les champs obligatoires");
+        // Aller à la première étape avec erreur
         for (let i = 0; i < steps.length; i++) {
           const invalidFields = steps[i].querySelectorAll('.is-invalid');
           if (invalidFields.length > 0) {
@@ -886,7 +843,7 @@ form.addEventListener('submit', function (e) {
     }
 
     // Gestion des informations de paiement
-    /*const paiementOM = document.getElementById('paiement_om');
+    const paiementOM = document.getElementById('paiement_om');
     const paiementEspece = document.getElementById('paiement_espece');
     const infoOM = document.getElementById('infoPaiementOM');
     const infoEspece = document.getElementById('infoPaiementEspece');
@@ -902,7 +859,7 @@ form.addEventListener('submit', function (e) {
     }
 
     paiementOM.addEventListener('change', updatePaymentInfo);
-    paiementEspece.addEventListener('change', updatePaymentInfo);*/
+    paiementEspece.addEventListener('change', updatePaymentInfo);
 
     // Validation en temps réel de l'email
     const emailInput = document.querySelector('input[name="email"]');

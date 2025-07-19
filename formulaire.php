@@ -7,7 +7,9 @@
   <title>PSSFP - Formulaire de Candidature</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
+  <link rel="stylesheet" href="assets/style/style_form.css">
+<style>
+  
     body {
       font-family: 'Poppins', sans-serif;
       background-color: #f2f0f5;
@@ -94,7 +96,7 @@
       color: #dc3545;
       font-size: 0.875em;
     }
-  </style>
+</style>
 </head>
 
 <body>
@@ -118,7 +120,6 @@
         <div class="step">3</div>
         <div class="step">4</div>
         <div class="step">5</div>
-        <!--<div class="step">6</div>-->
       </div>
 
       <div class="form-step active">
@@ -194,24 +195,12 @@
           </div>
           <div class="col-md-6 mb-3">
             <label>Lieu de naissance *</label>
-            <input type="text" class="form-control" name="lieu_naissance" required>
+            <input type="text" class="form-control" min="1960-01-01" max="2007-01-01" name="lieu_naissance" required>
           </div>
         </div>
-        <!--<div class="row">
-    <div class="col-md-6 mb-3">
-      <label>Région *</label>
-      <input type="text" class="form-control" name="region" required>
-    </div>
-    <div class="col-md-6 mb-3">
-      <label>Département *</label>
-      <input type="text" class="form-control" name="departement" required>
-    </div>
-  </div>-->
+        
         <div class="row">
-          <!--<div class="col-md-6 mb-3">
-      <label>Nationalité *</label>
-      <input type="text" class="form-control" name="nationalite" required>
-    </div>-->
+         
           <div class="col-md-6 mb-3">
             <label>Statut matrimonial *</label>
             <select class="form-select" name="statut_matrimonial" required>
@@ -299,7 +288,7 @@
           <div class="col-md-6 mb-3">
             <label>Autre Téléphone</label>
             <div class="input-group">
-              <select class="form-select" name="indicatif2" id="indicatif2" style="max-width: 120px;">
+              <select class="form-select" name="indicatif2" required id="indicatif2" style="max-width: 120px;">
                 <option value="">Indicatif</option>
               </select>
               <input type="tel" class="form-control" name="telephone2">
@@ -325,24 +314,24 @@
         <div class="row">
           <div class="col-md-6 mb-3">
             <label>Dernier diplôme obtenu</label>
-            <input type="text" class="form-control" name="diplome_obtenu">
+            <input type="text" class="form-control" required name="diplome_obtenu">
           </div>
           <div class="col-md-6 mb-3">
             <label>Institut d'obtention</label>
-            <input type="text" class="form-control" name="institut">
+            <input type="text" class="form-control" required name="institut">
           </div>
         </div>
         <div class="row">
           <div class="col-md-6 mb-3">
             <label>Spécialité du diplôme requis</label>
-            <input type="text" class="form-control" name="specialite_diplome">
+            <input type="text" class="form-control" required name="specialite_diplome">
           </div>
           <div class="col-md-6 mb-3">
             <label>Année d'obtention du diplôme requis</label>
-            <input type="number" class="form-control" name="annee_diplome">
+            <input type="number" class="form-control" min="2000" required name="annee_diplome">
           </div>
         </div>
-        
+
 
         <h4>V - Vos Coordonnées Professionnelles</h4>
         <div class="row">
@@ -355,28 +344,22 @@
               <option value="Contractuel">Contractuel</option>
               <option value="Travailleur privé">Travailleur privé</option>
               <option value="Autre">Autre</option>
-            </select> 
+            </select>
           </div>
           <div class="col-md-6 mb-3">
             <label>Employeur</label>
-            <input type="text" class="form-control" name="employeur">
+            <input type="text" class="form-control" required name="employeur">
           </div>
         </div>
         <div class="row">
           <div class="col-md-6 mb-3">
             <label>Adresse de l'employeur</label>
-            <input type="text" class="form-control" name="adresse_employeur2">
+            <input type="text" class="form-control" required name="adresse_employeur2">
           </div>
           <div class="col-md-6 mb-3">
             <label>Téléphone de l'employeur</label>
-            <input type="tel" class="form-control" name="tel_employeur">
+            <input type="tel" class="form-control" required name="tel_employeur">
           </div>
-        </div>
-        <div class="row">
-          <!--<div class="col-md-6 mb-3">
-            <label>Email de l'administration</label>
-            <input type="email" class="form-control" name="email_admin">
-          </div>-->
         </div>
       </div>
       <div class="form-step">
@@ -394,7 +377,7 @@
         <h4>VII - Engagement</h4>
         <div class="mb-3">
           <label>Je soussigné(e)</label>
-          <input type="text" class="form-control" name="engagement_nom" required>
+          <input type="text" class="form-control" placeholder="Entrez votre nom pour valider" name="engagement_nom" required>
         </div>
         <p>Certifie sous l'honneur, l'exactitude des renseignements consignés dans cette fiche de candidature et avoir
           eu connaissance des conditions exigées pour être retenu comme candidat au programme de Master Professionnel en
@@ -417,30 +400,6 @@
           <p>Si vous devez modifier une information, utilisez le bouton "Précédent".</p>
         </div>
       </div><br>
-      <!--<div class="form-step">
-        <h4>VIII - Paiement des frais de candidature</h4>
-        <div class="mb-3">
-          <label>Mode de paiement *</label><br>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="mode_paiement" id="paiement_om" value="OM/MoMo" required>
-            <label class="form-check-label" for="paiement_om">Mobile Money (OM/MoMo)</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="mode_paiement" id="paiement_espece" value="Especes"
-              required>
-            <label class="form-check-label" for="paiement_espece">Espèces (paiement sur place)</label>
-          </div>
-        </div>
-
-        <div class="mb-3 d-none" id="infoPaiementOM">
-          <p class="alert alert-info">Veuillez effectuer un paiement de <strong>10 000 FCFA</strong> via Orange Money ou
-            MoMo au numéro suivant : <strong>699 99 99 99</strong>. Ensuite, conservez la preuve de paiement.</p>
-        </div>
-        <div class="mb-3 d-none" id="infoPaiementEspece">
-          <p class="alert alert-info">Le paiement en espèces s'effectuera sur place au moment du dépôt physique de votre
-            dossier.</p>
-        </div>
-      </div>-->
 
       <div class="form-navigation">
         <button type="button" class="btn btn-secondary" id="prevBtn">Précédent</button>
@@ -462,9 +421,8 @@
     const form = document.getElementById('multiStepForm');
     let currentStep = 0;
 
-saveFirstStepData
+    saveFirstStepData
 
-    ////////////////////////////////////////////////////////////////////////:
     // Fonction pour charger les régions en fonction du pays sélectionné
     document.getElementById('pays_origine').addEventListener('change', function () {
       const paysCode = this.value;
@@ -475,7 +433,6 @@ saveFirstStepData
       document.getElementById('departement').innerHTML = '<option value="">--- Sélectionnez d\'abord la région ---</option>';
 
       if (paysCode === 'CM') {
-        // Charger les régions du Cameroun
         fetch('get_regions.php?pays=CM')
           .then(response => response.json())
           .then(data => {
@@ -485,13 +442,11 @@ saveFirstStepData
             });
           });
       } else if (paysCode) {
-        // Pour les autres pays, mettre simplement "Autres"
         regionSelect.innerHTML = '<option value="AUTRES">Autres</option>';
         document.getElementById('departement').innerHTML = '<option value="AUTRES">Autres</option>';
       }
     });
 
-    // Fonction pour charger les départements en fonction de la région sélectionnée
     document.getElementById('region').addEventListener('change', function () {
       const region = this.value;
       const departementSelect = document.getElementById('departement');
@@ -511,7 +466,6 @@ saveFirstStepData
       }
     });
 
-    // Fonction pour charger l'indicatif du pays de résidence
     document.getElementById('pays_residence').addEventListener('change', function () {
       const paysCode = this.value;
       const indicatif1 = document.getElementById('indicatif1');
@@ -529,137 +483,126 @@ saveFirstStepData
         indicatif2.innerHTML = '<option value="">Indicatif</option>';
       }
     });
-    ////////////////////////////////////////////////////////////////////////
 
     nextBtn.addEventListener('click', () => {
-    const currentStepFields = steps[currentStep].querySelectorAll('[required]');
-    let isValid = true;
+      const currentStepFields = steps[currentStep].querySelectorAll('[required]');
+      let isValid = true;
 
-    currentStepFields.forEach(field => {
+      currentStepFields.forEach(field => {
         if (!field.reportValidity()) {
-            isValid = false;
-            field.classList.add('is-invalid');
+          isValid = false;
+          field.classList.add('is-invalid');
         } else {
-            field.classList.remove('is-invalid');
+          field.classList.remove('is-invalid');
         }
-    });
+      });
 
-    if (!isValid) return;
+      if (!isValid) return;
 
-    // Si c'est le premier step, on sauvegarde et crée le compte
-    if (currentStep === 0) {
+      // Si c'est le premier step, on sauvegarde et crée le compte
+      if (currentStep === 0) {
         saveFirstStepData();
-        return; // On ne passe pas à l'étape suivante tout de suite
-    }
-    
-    // Si on arrive à l'étape de récapitulatif, on génère le contenu
-    if (currentStep === steps.length - 2) {
+        return; 
+      }
+      // Si on arrive à l'étape de récapitulatif, on génère le contenu
+      if (currentStep === steps.length - 2) {
         generateRecapContent();
-    }
-    
-    currentStep++;
-    updateFormSteps();
-});
-
-// Dans la fonction saveFirstStepData
-function saveFirstStepData() {
-    const formData = new FormData();
-    const firstStepFields = steps[0].querySelectorAll('input, select, textarea');
-    
-    firstStepFields.forEach(field => {
-        if (field.type === 'file') {
-            if (field.files[0]) {
-                formData.append(field.name, field.files[0]);
-            }
-        } else {
-            formData.append(field.name, field.value);
-        }
+      }
+      currentStep++;
+      updateFormSteps();
     });
 
-    fetch('save_first_step.php', {
+    // Dans la fonction saveFirstStepData
+    function saveFirstStepData() {
+      const formData = new FormData();
+      const firstStepFields = steps[0].querySelectorAll('input, select, textarea');
+
+      firstStepFields.forEach(field => {
+        if (field.type === 'file') {
+          if (field.files[0]) {
+            formData.append(field.name, field.files[0]);
+          }
+        } else {
+          formData.append(field.name, field.value);
+        }
+      });
+
+      fetch('save_first_step.php', {
         method: 'POST',
         body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
             // Stocker l'ID et le numéro de candidat dans le formulaire
             form.dataset.candidateId = data.candidateId;
             form.dataset.numeroCandidat = data.numeroCandidat;
-            
-            // Afficher le numéro de candidat à l'utilisateur
-            alert(`Votre numéro de candidat est: ${data.numeroCandidat}. Veuillez le noter car il vous servira d'identifiant.`);
-            
-            // NE PAS passer à l'étape suivante ici
-            // On reste sur l'étape actuelle (1)
-            // L'utilisateur devra cliquer sur "Suivant" manuellement
-        } else {
+          } else {
             alert('Erreur: ' + data.message);
-        }
-    })
-    .catch(error => {
-        console.error('Erreur:', error);
-        alert('Une erreur est survenue');
-    });
-}
-
-// Dans le gestionnaire de soumission du formulaire
-form.addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    const formData = new FormData(form);
-    // Ajouter l'ID du candidat aux données
-    formData.append('candidate_id', form.dataset.candidateId);
-
-    fetch('update_candidate.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-    if (data.success) {
-        if (data.redirect_url) {
-            window.location.href = data.redirect_url;
-        } else {
-            window.location.href = '.php?id=' + form.dataset.candidateId;
-        }
-    } else {
-        alert("Erreur: " + data.message);
+          }
+        })
+        .catch(error => {
+          console.error('Erreur:', error);
+          alert('Une erreur est survenue');
+        });
     }
-})
-    .catch(error => {
-        console.error('Erreur:', error);
-        alert("Une erreur s'est produite");
-    });
-});
 
-// Dans le gestionnaire de soumission du formulaire
-form.addEventListener('submit', function (e) {
-    e.preventDefault();
+    // Dans le gestionnaire de soumission du formulaire
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
 
-    const formData = new FormData(form);
-    formData.append('candidate_id', form.dataset.candidateId);
+      const formData = new FormData(form);
+      // Ajouter l'ID du candidat aux données
+      formData.append('candidate_id', form.dataset.candidateId);
 
-    fetch('update_candidate.php', {
+      fetch('update_candidate.php', {
         method: 'POST',
         body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            window.location.href = 'recapitulatif.php?id=' + form.dataset.candidateId;
-        } else {
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            if (data.redirect_url) {
+              window.location.href = data.redirect_url;
+            } else {
+              window.location.href = '.php?id=' + form.dataset.candidateId;
+            }
+          } else {
             alert("Erreur: " + data.message);
-        }
-    })
-    .catch(error => {
-        console.error('Erreur:', error);
-        alert("Une erreur s'est produite");
+          }
+        })
+        .catch(error => {
+          console.error('Erreur:', error);
+          alert("Une erreur s'est produite");
+        });
     });
-});
+
+    // Dans le gestionnaire de soumission du formulaire
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      formData.append('candidate_id', form.dataset.candidateId);
+
+      fetch('update_candidate.php', {
+        method: 'POST',
+        body: formData
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            window.location.href = 'recapitulatif.php?id=' + form.dataset.candidateId;
+          } else {
+            alert("Erreur: " + data.message);
+          }
+        })
+        .catch(error => {
+          console.error('Erreur:', error);
+          alert("Une erreur s'est produite");
+        });
+    });
 
 
-    ///////////////////////////////////////////////////////////////////////
     function generateRecapContent() {
       const formData = new FormData(document.getElementById('multiStepForm'));
       let recapHTML = '<div class="row">';
@@ -773,35 +716,32 @@ form.addEventListener('submit', function (e) {
       updateFormSteps();
     });
 
-form.addEventListener('submit', function (e) {
-    e.preventDefault();
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
 
-    if (!validateForm()) return;
+      if (!validateForm()) return;
 
-    const formData = new FormData(form);
-    formData.append('candidate_id', form.dataset.candidateId);
+      const formData = new FormData(form);
+      formData.append('candidate_id', form.dataset.candidateId);
 
-    fetch('update_candidate.php', {
+      fetch('update_candidate.php', {
         method: 'POST',
         body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
             window.location.href = 'recapitulatif.php?id=' + form.dataset.candidateId;
-        } else {
+          } else {
             alert("Erreur lors de la mise à jour: " + data.message);
-        }
-    })
-    .catch(error => {
-        console.error('Erreur:', error);
-        alert("Une erreur s'est produite lors de la soumission.");
+          }
+        })
+        .catch(error => {
+          console.error('Erreur:', error);
+          alert("Une erreur s'est produite lors de la soumission.");
+        });
     });
-});
 
-//////////////////////////////////////////////
-/////////////////////////////////////////////
-    // Validation globale du formulaire
     function validateForm() {
       // Validation des emails
       const email = document.querySelector('[name="email"]').value;
@@ -841,25 +781,6 @@ form.addEventListener('submit', function (e) {
 
       return true;
     }
-
-    // Gestion des informations de paiement
-    const paiementOM = document.getElementById('paiement_om');
-    const paiementEspece = document.getElementById('paiement_espece');
-    const infoOM = document.getElementById('infoPaiementOM');
-    const infoEspece = document.getElementById('infoPaiementEspece');
-
-    function updatePaymentInfo() {
-      if (paiementOM.checked) {
-        infoOM.classList.remove('d-none');
-        infoEspece.classList.add('d-none');
-      } else if (paiementEspece.checked) {
-        infoOM.classList.add('d-none');
-        infoEspece.classList.remove('d-none');
-      }
-    }
-
-    paiementOM.addEventListener('change', updatePaymentInfo);
-    paiementEspece.addEventListener('change', updatePaymentInfo);
 
     // Validation en temps réel de l'email
     const emailInput = document.querySelector('input[name="email"]');
